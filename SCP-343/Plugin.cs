@@ -15,7 +15,7 @@ namespace SCP_343
 
 		public override string Prefix { get; } = "SCP-343";
 
-		public override Version Version { get; } = new Version(1, 1, 0);
+		public override Version Version { get; } = new Version(1, 1, 5);
 
 		public override Version RequiredExiledVersion { get; } = new Version(2, 3, 4);
 
