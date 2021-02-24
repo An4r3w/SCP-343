@@ -4,33 +4,24 @@ using Exiled.API.Features;
 using Exiled.Permissions.Extensions;
 using MEC;
 using SCP_343;
-
+using RemoteAdmin;
 namespace Commands.SpawnSCP343
 {
 	[CommandHandler(typeof(RemoteAdminCommandHandler))]
-	[CommandHandler(typeof(GameConsoleCommandHandler))]
-	internal class SpawnSCP343 : ParentCommand
+	internal class SpawnSCP343 : ICommand
 	{
-		public SpawnSCP343()
-		{
-			this.LoadGeneratedCommands();
-		}
 
-		public override string Command { get; } = "spawnscp343";
+		public string Command { get; } = "spawnscp343";
 
-		public override string[] Aliases { get; } = new string[]
+		public string[] Aliases { get; } = new string[]
 		{
 			"343",
 			"spawn343"
 		};
 
-		public override string Description { get; } = "Spawn SCP-343!";
+		public string Description { get; } = "Spawn SCP-343!";
 
-		public override void LoadGeneratedCommands()
-		{
-		}
-
-		protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
+		public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
 		{
 			Player player = Player.Get(((CommandSender)sender).SenderId);
 			if (!Permissions.CheckPermission((CommandSender)sender, "scp343.spawn"))
@@ -46,21 +37,18 @@ namespace Commands.SpawnSCP343
 					response = "Usage: spawn343";
 					return false;
 				}
-				Player target = Player.Get(CollectionExtensions.At<string>(arguments, 0));
-				if (target == null)
+				if (player == null)
 				{
-					response = "The player " + CollectionExtensions.At<string>(arguments, 1) + " is invalid";
+					response = $"The player{Player.Get(player.Sender).Nickname} is invalid";
 					return false;
 				}
-				target.SetRole((RoleType)14, false, false);
 				Timing.CallDelayed(1f, delegate()
 				{
-					EventHandlers.spawn343(target);
+					EventHandlers.spawn343(player);
 				});
-				response = "The player " + CollectionExtensions.At<string>(arguments, 1) + " is now SCP-343";
+				response = "The player is now SCP-343";
 				return true;
 			}
-			else
 			{
 				if (EventHandlers.scp343.Count != 0)
 				{
@@ -74,8 +62,6 @@ namespace Commands.SpawnSCP343
 				});
 				response = "You spawned yourself as SCP-343";
 				return true;
-
-				// yo, if you found this ur a code stealer... or an Amathor too :)
 			}
 		}
 	}
