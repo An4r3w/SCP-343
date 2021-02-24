@@ -1,9 +1,5 @@
-﻿using System;
+using System;
 using Exiled.API.Features;
-using Exiled.Events;
-using Exiled.Events.EventArgs;
-using Exiled.Events.Handlers;
-using Exiled.API.Enums;
 using PlayerEvent = Exiled.Events.Handlers.Player;
 using MapEvent = Exiled.Events.Handlers.Map;
 using WarheadEvent = Exiled.Events.Handlers.Warhead;
@@ -28,15 +24,6 @@ namespace SCP_343
 		public override void OnEnabled()
 		{
 			Plugin.Singleton = this;
-			string[] array = new string[5];
-			array[0] = this.Name;
-			array[1] = " ";
-			array[2] = this.Author;
-			array[3] = " Version: ";
-			int num = 4;
-			Version version = this.Version;
-			array[num] = ((version != null) ? version.ToString() : null);
-			Log.Info(string.Concat(array));
 			this.EventHandlers = new EventHandlers();
 			PlayerEvent.ChangingRole += EventHandlers.onRoleChange;
 			PlayerEvent.Died += EventHandlers.onDeath;
@@ -61,10 +48,6 @@ namespace SCP_343
 			WarheadEvent.Detonated -= EventHandlers.onWarheadExplosion;
 			ServerEvent.RoundEnded -= EventHandlers.onRoundEnd;
 			this.EventHandlers = null;
-		}
-
-		public override void OnReloaded()
-		{
 		}
 
 		public static Plugin Singleton;
