@@ -20,7 +20,7 @@ Adds a new powerful SCP on the side of the Class-D!
 | --- | --- | --- | --- |
 | `spawnscp343` | spawn343 {playerId} | 343 | Spawns 343 with a command! |
 
-# Donwloads
+# Downloads
 
 ![img](https://img.shields.io/github/downloads/An4r3w/scp-343/total?style=for-the-badge)
 
