@@ -1,10 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
-using MEC;
-using System.Linq;
-using Exiled.API.Enums;
 
 namespace SCP_343
 {
@@ -30,10 +27,7 @@ namespace SCP_343
 					else
 						ev.Player.Health += healAmount;
 				}
-
-				{
 					ev.Player.Health += ev.Player.Health * Plugin.Singleton.Config.healthPercent;
-				}
 			}
 			if (EventHandlers.scp343.Contains(ev.Player))
 			{
@@ -81,11 +75,6 @@ namespace SCP_343
 				{
 					p.IsBypassModeEnabled = true;
 				}
-				{
-					Timing.CallDelayed(1f, delegate ()
-					{
-					});
-				}
 			}
 		}
 
@@ -103,7 +92,6 @@ namespace SCP_343
 			{
 				player.Kill(DamageTypes.Nuke);
 				player.Broadcast(Plugin.Singleton.Config.broadcastLength, Plugin.Singleton.Config.nukeDeath343, 0);
-				if (EventHandlers.scp343.Contains(player))
 				{
 					this.kill343(player);
 				}
