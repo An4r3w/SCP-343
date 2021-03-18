@@ -1,8 +1,6 @@
 using System;
 using Exiled.API.Features;
 using PlayerEvent = Exiled.Events.Handlers.Player;
-using MapEvent = Exiled.Events.Handlers.Map;
-using WarheadEvent = Exiled.Events.Handlers.Warhead;
 using ServerEvent = Exiled.Events.Handlers.Server;
 
 namespace SCP_343
@@ -15,9 +13,9 @@ namespace SCP_343
 
 		public override string Prefix { get; } = "SCP-343";
 
-		public override Version Version { get; } = new Version(1, 1, 5);
+		public override Version Version { get; } = new Version(2, 0, 0);
 
-		public override Version RequiredExiledVersion { get; } = new Version(2, 3, 4);
+		public override Version RequiredExiledVersion { get; } = new Version(2, 3, 3);
 
         internal EventHandlers EventHandlers { get; set; }
 
@@ -31,8 +29,6 @@ namespace SCP_343
 			PlayerEvent.Handcuffing += EventHandlers.onDetain;
 			PlayerEvent.DroppingItem += EventHandlers.onItemDrop;
 			PlayerEvent.PickingUpItem += EventHandlers.onItemGrab;
-			MapEvent.Decontaminating += EventHandlers.onDecontamination;
-			WarheadEvent.Detonated += EventHandlers.onWarheadExplosion;
 			ServerEvent.RoundEnded += EventHandlers.onRoundEnd;
 		}
 
@@ -44,8 +40,6 @@ namespace SCP_343
 			PlayerEvent.Handcuffing -= EventHandlers.onDetain;
 			PlayerEvent.DroppingItem -= EventHandlers.onItemDrop;
 			PlayerEvent.PickingUpItem -= EventHandlers.onItemGrab;
-			MapEvent.Decontaminating -= EventHandlers.onDecontamination;
-			WarheadEvent.Detonated -= EventHandlers.onWarheadExplosion;
 			ServerEvent.RoundEnded -= EventHandlers.onRoundEnd;
 			this.EventHandlers = null;
 		}
