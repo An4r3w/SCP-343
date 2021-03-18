@@ -19,15 +19,6 @@ namespace SCP_343
 					EventHandlers.spawn343(ev.Player);
 				}
 
-				{
-					
-					float healAmount = ev.Player.Health * Plugin.Singleton.Config.healthPercent;
-					if ((ev.Player.Health + healAmount) > ev.Player.MaxHealth)
-						ev.Player.Health = ev.Player.MaxHealth;
-					else
-						ev.Player.Health += healAmount;
-				}
-					ev.Player.Health += ev.Player.Health * Plugin.Singleton.Config.healthPercent;
 			}
 			if (EventHandlers.scp343.Contains(ev.Player))
 			{
@@ -75,6 +66,14 @@ namespace SCP_343
 				{
 					p.IsBypassModeEnabled = true;
 				}
+
+				foreach (ItemType item in Plugin.Singleton.Config.spawnInventory)
+				{
+					p.AddItem(item);
+				}
+
+				p.MaxHealth = Plugin.Singleton.Config.healthPercent;
+				p.Health = Plugin.Singleton.Config.healthPercent;
 			}
 		}
 
@@ -83,31 +82,6 @@ namespace SCP_343
 			if (EventHandlers.scp343.Contains(ev.Player))
 			{
 				this.kill343(ev.Player);
-			}
-		}
-
-		public void onWarheadExplosion()
-		{
-			foreach (Player player in EventHandlers.scp343)
-			{
-				player.Kill(DamageTypes.Nuke);
-				player.Broadcast(Plugin.Singleton.Config.broadcastLength, Plugin.Singleton.Config.nukeDeath343, 0);
-				{
-					this.kill343(player);
-				}
-			}
-		}
-
-		public void onDecontamination(DecontaminatingEventArgs ev)
-		{
-			foreach (Player player in EventHandlers.scp343)
-			{
-				player.Kill(DamageTypes.Decont);
-				player.Broadcast(Plugin.Singleton.Config.broadcastLength, Plugin.Singleton.Config.deconDeath343, 0);
-				if (EventHandlers.scp343.Contains(player))
-				{
-					this.kill343(player);
-				}
 			}
 		}
 
