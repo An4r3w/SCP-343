@@ -9,7 +9,7 @@ Adds a new powerful SCP on the side of the Class-D!
 - He's cool 😁
 - He can escape with no problems!
 - He can't be cuffed (customizable)
-- When he get terminated by nuke appears a broadcast! (customizable)
+- When he get terminated by the nuke appears a broadcast! (customizable)
 - When he get terminated by decontamination appears a broadcast! (customizable)
 - If you don't want it invincible, you can set his health by configs!
 - When he spawns appears a broadcast! (customizable)
